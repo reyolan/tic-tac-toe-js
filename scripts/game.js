@@ -77,10 +77,7 @@ function printTurn(e, mark) {
 	e.target.textContent = mark;
 	flatBoard[index] = mark;
 
-	board = [];
-	board.push(flatBoard.slice(0, 3));
-	board.push(flatBoard.slice(3, 6));
-	board.push(flatBoard.slice(6, 9));
+	board = [flatBoard.slice(0, 3), flatBoard.slice(3, 6), flatBoard.slice(6, 9)];
 }
 
 const inGameEvent = () => {
