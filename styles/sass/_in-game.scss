@@ -1,0 +1,48 @@
+.in-game {
+	opacity: 0;
+
+	&.-show {
+		opacity: 1;
+		transition: opacity 1s 0.5s;
+	}
+	&.-hide {
+		display: none;
+	}
+}
+
+.board {
+	display: grid;
+	width: 50vh;
+	height: 50vh;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	border: solid black 5px;
+
+	> .square {
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		user-select: none;
+	}
+
+	> .square:hover {
+		background-color: rgb(216, 216, 216);
+	}
+
+	> .square:nth-child(3n) {
+		border-left: solid black 5px;
+	}
+
+	> .square:nth-child(3n + 1) {
+		border-right: solid black 5px;
+	}
+
+	> .square:nth-child(-n + 3) {
+		border-bottom: solid black 5px;
+	}
+
+	> .square:nth-child(n + 7) {
+		border-top: solid black 5px;
+	}
+}

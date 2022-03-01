@@ -1,0 +1,30 @@
+#main-container {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.top {
+	height: 6rem;
+	background-color: black;
+	&.hide-transition {
+		height: 0;
+		transition: height 1s;
+	}
+
+	&.-hide {
+		display: none;
+	}
+}
+
+.bottom {
+	height: 6rem;
+	background-color: black;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

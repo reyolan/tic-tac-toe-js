@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  line-height: 1.15;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Dunkin Lyons", sans-serif;
+}
+
+#start-game {
+  font-size: 3rem;
+}
+
+.title {
+  font-size: 8rem;
+}
+
+.board {
+  font-size: 10vh;
+}
+
+#main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top {
+  height: 6rem;
+  background-color: black;
+}
+.top.hide-transition {
+  height: 0;
+  transition: height 1s;
+}
+.top.-hide {
+  display: none;
+}
+
+.bottom {
+  height: 6rem;
+  background-color: black;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-game {
+  opacity: 1;
+}
+.start-game.hide-transition {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.start-game.-hide {
+  display: none;
+}
+
+#start-game {
+  border: 0;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  background-color: #5ad85a;
+  cursor: pointer;
+}
+#start-game:hover {
+  opacity: 0.9;
+}
+
+.in-game {
+  opacity: 0;
+}
+.in-game.-show {
+  opacity: 1;
+  transition: opacity 1s 0.5s;
+}
+.in-game.-hide {
+  display: none;
+}
+
+.board {
+  display: grid;
+  width: 50vh;
+  height: 50vh;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: solid black 5px;
+}
+.board > .square {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+.board > .square:hover {
+  background-color: #d8d8d8;
+}
+.board > .square:nth-child(3n) {
+  border-left: solid black 5px;
+}
+.board > .square:nth-child(3n+1) {
+  border-right: solid black 5px;
+}
+.board > .square:nth-child(-n+3) {
+  border-bottom: solid black 5px;
+}
+.board > .square:nth-child(n+7) {
+  border-top: solid black 5px;
+}
+
+/*# sourceMappingURL=style.css.map */

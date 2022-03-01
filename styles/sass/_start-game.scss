@@ -1,0 +1,24 @@
+.start-game {
+	opacity: 1;
+
+	&.hide-transition {
+		opacity: 0;
+		transition: opacity 1s;
+	}
+
+	&.-hide {
+		display: none;
+	}
+}
+
+#start-game {
+	border: 0;
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	background-color: rgb(90, 216, 90);
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.9;
+	}
+}
