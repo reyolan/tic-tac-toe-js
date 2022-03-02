@@ -1,7 +1,9 @@
-import { playerTurnIndicator } from "./constant.js";
-
 function turnIndicator(element) {
-	element.classList.add("present-turn");
+	element.classList.toggle("present-turn");
 }
 
-export { turnIndicator };
+function resetIndicator(element) {
+	element.classList.remove("present-turn");
+}
+
+export { turnIndicator, resetIndicator };

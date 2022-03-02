@@ -1,4 +1,10 @@
-import { squares, restartButton, playerScore } from "./constant.js";
+import {
+	squares,
+	restartButton,
+	playerScore,
+	playerTurnIndicator,
+} from "./constant.js";
+import { turnIndicator, resetIndicator } from "./turn-indicator.js";
 
 let board = [
 	["", "", ""],
@@ -13,6 +19,8 @@ let oScore = 0;
 
 function gameSequence(e) {
 	const remainingTurn = board.flat().filter((element) => element === "").length;
+	turnIndicator(playerTurnIndicator[0]);
+	turnIndicator(playerTurnIndicator[1]);
 
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, "X");
@@ -23,6 +31,7 @@ function gameSequence(e) {
 		}
 	} else {
 		printTurn(e, "O");
+
 		if (isWinner("O")) {
 			oScore += 1;
 			playerScore[1].textContent = oScore;
@@ -31,6 +40,8 @@ function gameSequence(e) {
 	}
 
 	if (remainingTurn === 1) {
+		resetIndicator(playerTurnIndicator[0]);
+		resetIndicator(playerTurnIndicator[1]);
 		console.log("DRAW!");
 	}
 }
@@ -97,6 +108,14 @@ function restartGame() {
 		["", "", ""],
 		["", "", ""],
 	];
+
+	resetIndicator(playerTurnIndicator[0]);
+	resetIndicator(playerTurnIndicator[1]);
+	turnIndicator(playerTurnIndicator[0]);
+}
+
+function resetScore() {
+	xScore = oScore = playerScore[0].textContent = playerScore[1].textContent = 0;
 }
 
 const inGameEvent = () => {
@@ -106,4 +125,4 @@ const inGameEvent = () => {
 	restartButton.addEventListener("click", restartGame);
 };
 
-export { inGameEvent, xScore, oScore };
+export { inGameEvent, resetScore };
