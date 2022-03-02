@@ -3,7 +3,7 @@
 	opacity: 0;
 
 	.title {
-		margin: 2rem auto 0;
+		margin: 0 auto;
 	}
 
 	&.-show {
@@ -16,11 +16,18 @@
 
 	&.buttons {
 		border: solid red 1px;
+		width: 100%;
+		padding: 0 1rem;
 	}
 
 	&.game {
 		flex-direction: column;
 		gap: 4rem;
+	}
+
+	&.hide-transition {
+		opacity: 0;
+		transition: opacity 1s;
 	}
 }
 
@@ -65,12 +72,25 @@
 .turn {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 4rem;
+}
 
-	p {
-		border: solid black 1px;
-		border-radius: 5px;
-		padding: 1rem 1.6rem;
+.game-option {
+	margin: 0 auto;
+	display: flex;
+	gap: 0.5rem;
+	border: solid yellow 1px;
+}
+
+.turn-indicator {
+	border: solid black 1px;
+	border-radius: 5px;
+	padding: 1rem 1.6rem;
+	transform: scale(1);
+	transition: transform 1s;
+	&.present-turn {
+		transform: scale(1.5);
 	}
 }
 
@@ -78,5 +98,9 @@
 	.board {
 		width: 300px;
 		height: 300px;
+	}
+
+	.game-option {
+		margin-left: auto;
 	}
 }

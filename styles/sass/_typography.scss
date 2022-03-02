@@ -6,6 +6,10 @@ body {
 	font-family: "Dunkin Lyons", sans-serif;
 }
 
+button {
+	font-size: 2.4rem;
+}
+
 #start-game {
 	font-size: 3rem;
 }
@@ -23,7 +27,11 @@ body {
 }
 
 .player {
-	font-size: 2.4rem;
+	font-size: 3.2rem;
+}
+
+.input-name {
+	font-size: 1.6rem;
 }
 
 @media screen and (max-width: 600px) {

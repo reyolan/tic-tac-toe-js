@@ -21,6 +21,10 @@ body {
   font-family: "Dunkin Lyons", sans-serif;
 }
 
+button {
+  font-size: 2.4rem;
+}
+
 #start-game {
   font-size: 3rem;
 }
@@ -38,7 +42,11 @@ body {
 }
 
 .player {
-  font-size: 2.4rem;
+  font-size: 3.2rem;
+}
+
+.input-name {
+  font-size: 1.6rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -61,6 +69,7 @@ body {
 .top {
   height: 6rem;
   background-color: black;
+  transition: height 1s;
 }
 .top.hide-transition {
   height: 0;
@@ -83,10 +92,17 @@ body {
 
 button {
   cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
+button:hover {
+  opacity: 0.9;
 }
 
 .start-game {
   opacity: 1;
+  text-align: center;
 }
 .start-game.hide-transition {
   opacity: 0;
@@ -97,20 +113,15 @@ button {
 }
 
 #start-game {
-  border: 0;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
   background-color: #5ad85a;
-  cursor: pointer;
-}
-#start-game:hover {
-  opacity: 0.9;
 }
 
 .input-name-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 5rem;
+  margin-top: 1rem;
 }
 .input-name-container > div {
   display: flex;
@@ -118,6 +129,9 @@ button {
   justify-content: center;
   align-items: center;
   gap: 3rem;
+  border: solid black 2px;
+  border-radius: 5px;
+  padding: 1rem;
 }
 
 .in-game {
@@ -125,7 +139,7 @@ button {
   opacity: 0;
 }
 .in-game .title {
-  margin: 2rem auto 0;
+  margin: 0 auto;
 }
 .in-game.-show {
   opacity: 1;
@@ -136,10 +150,16 @@ button {
 }
 .in-game.buttons {
   border: solid red 1px;
+  width: 100%;
+  padding: 0 1rem;
 }
 .in-game.game {
   flex-direction: column;
   gap: 4rem;
+}
+.in-game.hide-transition {
+  opacity: 0;
+  transition: opacity 1s;
 }
 
 .board {
@@ -177,12 +197,26 @@ button {
 .turn {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 4rem;
 }
-.turn p {
+
+.game-option {
+  margin: 0 auto;
+  display: flex;
+  gap: 0.5rem;
+  border: solid yellow 1px;
+}
+
+.turn-indicator {
   border: solid black 1px;
   border-radius: 5px;
   padding: 1rem 1.6rem;
+  transform: scale(1);
+  transition: transform 1s;
+}
+.turn-indicator.present-turn {
+  transform: scale(1.5);
 }
 
 @media screen and (max-width: 600px) {
@@ -190,6 +224,13 @@ button {
     width: 300px;
     height: 300px;
   }
+
+  .game-option {
+    margin-left: auto;
+  }
+}
+.input-name {
+  padding: 0.2rem 0.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

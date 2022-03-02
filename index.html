@@ -20,16 +20,18 @@
 							<input
 								type="text"
 								placeholder="Input name here"
-								maxlength="8"
+								maxlength="12"
+								size="10"
 								class="input-name"
 							/>
 						</div>
-						<div class="player">
-							<p>Player Two (O)</p>
+						<div>
+							<p class="player">Player Two (O)</p>
 							<input
 								type="text"
 								placeholder="Input name here"
-								maxlength="8"
+								maxlength="12"
+								size="10"
 								class="input-name"
 							/>
 						</div>
@@ -38,14 +40,15 @@
 				<div class="in-game game -hide">
 					<p class="title">Tic-tac-toe</p>
 					<div class="turn">
-						<p>
-							<span class="player-one name">Rey</span>(X):<span class="score"
-								>1</span
+						<p class="turn-indicator">
+							<span id="player-one" class="name"></span>(X):<span class="score"
+								>0</span
 							>
 						</p>
-						<p>
-							<span class="player-one name">Rex</span>(O):<span class="score"
-								>2</span
+						<p class="turn-indicator">
+							<span id="player-two" class="player-one name"></span>(O):<span
+								class="score"
+								>0</span
 							>
 						</p>
 					</div>

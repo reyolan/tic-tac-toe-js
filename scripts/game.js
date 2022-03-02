@@ -1,4 +1,4 @@
-import { squares, restartButton } from "./constant.js";
+import { squares, restartButton, playerScore } from "./constant.js";
 
 let board = [
 	["", "", ""],
@@ -6,10 +6,8 @@ let board = [
 	["", "", ""],
 ];
 
-//get the querySelectorAll of square
-//flatten the board para same lang sila ng sequence kapag naglagay ng turn
-//i-track kung pang ilang square yung pinindot, then ayun din yun ilalagay sa boardArray na nakaflat,
-//create the board again with array of arrays tapos i-assign sa variable na board
+let xScore = 0;
+let oScore = 0;
 
 //print to DOM
 
@@ -18,10 +16,18 @@ function gameSequence(e) {
 
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, "X");
-		if (isWinner("X")) return;
+		if (isWinner("X")) {
+			xScore += 1;
+			playerScore[0].textContent = xScore;
+			return;
+		}
 	} else {
 		printTurn(e, "O");
-		if (isWinner("O")) return;
+		if (isWinner("O")) {
+			oScore += 1;
+			playerScore[1].textContent = oScore;
+			return;
+		}
 	}
 
 	if (remainingTurn === 1) {

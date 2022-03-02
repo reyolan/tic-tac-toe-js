@@ -5,6 +5,8 @@ import {
 	inGameContainer,
 } from "./constant.js";
 
+import { getNameFromInput } from "./input.js";
+
 function startGameAnimation() {
 	topRowElement.classList.add("hide-transition");
 	startGameContainer.forEach((container) =>
@@ -14,8 +16,7 @@ function startGameAnimation() {
 	topRowElement.addEventListener(
 		"transitionend",
 		(e) => {
-			e.target.classList.add("-hide");
-			topRowElement.classList.remove("hide-transition");
+			// e.target.classList.add("-hide");
 
 			startGameContainer.forEach((container) => {
 				container.classList.add("-hide");
@@ -35,7 +36,13 @@ function inGameAnimation() {
 	});
 }
 
-const startGameEvent = () =>
-	startGameButton.addEventListener("click", startGameAnimation);
+function startGame() {
+	startGameAnimation();
+	getNameFromInput();
+}
+
+const startGameEvent = () => {
+	startGameButton.addEventListener("click", startGame);
+};
 
 export { startGameEvent };
