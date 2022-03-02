@@ -106,4 +106,4 @@ const inGameEvent = () => {
 	restartButton.addEventListener("click", restartGame);
 };
 
-export { inGameEvent };
+export { inGameEvent, xScore, oScore };
