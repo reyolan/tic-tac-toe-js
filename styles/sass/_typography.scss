@@ -15,5 +15,22 @@ body {
 }
 
 .board {
-	font-size: 10vh;
+	font-size: 10rem;
+}
+
+.turn {
+	font-size: 2.8rem;
+}
+
+.player {
+	font-size: 2.4rem;
+}
+
+@media screen and (max-width: 600px) {
+	.title {
+		font-size: 5.4rem;
+	}
+	.board {
+		font-size: 7rem;
+	}
 }

@@ -30,14 +30,32 @@ body {
 }
 
 .board {
-  font-size: 10vh;
+  font-size: 10rem;
 }
 
+.turn {
+  font-size: 2.8rem;
+}
+
+.player {
+  font-size: 2.4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 5.4rem;
+  }
+
+  .board {
+    font-size: 7rem;
+  }
+}
 #main-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 5rem;
 }
 
 .top {
@@ -63,6 +81,10 @@ body {
   justify-content: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 .start-game {
   opacity: 1;
 }
@@ -85,8 +107,25 @@ body {
   opacity: 0.9;
 }
 
+.input-name-container {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+.input-name-container > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
 .in-game {
+  display: flex;
   opacity: 0;
+}
+.in-game .title {
+  margin: 2rem auto 0;
 }
 .in-game.-show {
   opacity: 1;
@@ -95,11 +134,19 @@ body {
 .in-game.-hide {
   display: none;
 }
+.in-game.buttons {
+  border: solid red 1px;
+}
+.in-game.game {
+  flex-direction: column;
+  gap: 4rem;
+}
 
 .board {
   display: grid;
-  width: 50vh;
-  height: 50vh;
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   border: solid black 5px;
@@ -125,6 +172,24 @@ body {
 }
 .board > .square:nth-child(n+7) {
   border-top: solid black 5px;
+}
+
+.turn {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+.turn p {
+  border: solid black 1px;
+  border-radius: 5px;
+  padding: 1rem 1.6rem;
+}
+
+@media screen and (max-width: 600px) {
+  .board {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

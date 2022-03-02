@@ -22,3 +22,17 @@
 		opacity: 0.9;
 	}
 }
+
+.input-name-container {
+	display: flex;
+	justify-content: center;
+	gap: 5rem;
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 3rem;
+	}
+}

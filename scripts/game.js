@@ -1,4 +1,4 @@
-import { squares } from "./constant.js";
+import { squares, restartButton } from "./constant.js";
 
 let board = [
 	["", "", ""],
@@ -80,10 +80,24 @@ function printTurn(e, mark) {
 	board = [flatBoard.slice(0, 3), flatBoard.slice(3, 6), flatBoard.slice(6, 9)];
 }
 
+function restartGame() {
+	squares.forEach((square) => {
+		square.textContent = "";
+		square.addEventListener("click", gameSequence, { once: true });
+	});
+
+	board = [
+		["", "", ""],
+		["", "", ""],
+		["", "", ""],
+	];
+}
+
 const inGameEvent = () => {
 	squares.forEach((square) =>
 		square.addEventListener("click", gameSequence, { once: true })
 	);
+	restartButton.addEventListener("click", restartGame);
 };
 
 export { inGameEvent };

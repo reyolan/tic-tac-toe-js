@@ -14,9 +14,41 @@
 			<div class="middle row">
 				<div class="start-game">
 					<p class="title">Tic-tac-toe</p>
+					<div class="input-name-container">
+						<div>
+							<p class="player">Player One (X)</p>
+							<input
+								type="text"
+								placeholder="Input name here"
+								maxlength="8"
+								class="input-name"
+							/>
+						</div>
+						<div class="player">
+							<p>Player Two (O)</p>
+							<input
+								type="text"
+								placeholder="Input name here"
+								maxlength="8"
+								class="input-name"
+							/>
+						</div>
+					</div>
 				</div>
-				<div class="in-game -hide">
+				<div class="in-game game -hide">
 					<p class="title">Tic-tac-toe</p>
+					<div class="turn">
+						<p>
+							<span class="player-one name">Rey</span>(X):<span class="score"
+								>1</span
+							>
+						</p>
+						<p>
+							<span class="player-one name">Rex</span>(O):<span class="score"
+								>2</span
+							>
+						</p>
+					</div>
 					<div class="board">
 						<div class="square"></div>
 						<div class="square"></div>
@@ -34,8 +66,13 @@
 				<div class="start-game">
 					<button type="button" id="start-game">Start Game</button>
 				</div>
-				<div class="in-game -hide">
+				<div class="in-game buttons -hide">
 					<button type="button" id="return">Return</button>
+					<div class="game-option">
+						<button type="button" id="prev">Previous</button>
+						<button type="button" id="restart">Restart</button>
+						<button type="button" id="next">Next</button>
+					</div>
 				</div>
 			</div>
 		</div>
