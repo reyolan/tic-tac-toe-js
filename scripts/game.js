@@ -1,10 +1,7 @@
-import {
-	squares,
-	restartButton,
-	playerScore,
-	playerTurnIndicator,
-} from "./constant.js";
+import { squares, restartButton, playerTurnIndicator } from "./constant.js";
 import { turnIndicator, resetIndicator } from "./turn-indicator.js";
+import { logBoardHistory, resetBoardHistory } from "./history.js";
+import { incrementScore, playerOne, playerTwo } from "./player.js";
 
 let board = [
 	["", "", ""],
@@ -12,38 +9,42 @@ let board = [
 	["", "", ""],
 ];
 
-let xScore = 0;
-let oScore = 0;
+logBoardHistory();
 
 //print to DOM
 
 function gameSequence(e) {
+	if (e.target.textContent !== "") return;
+
 	const remainingTurn = board.flat().filter((element) => element === "").length;
-	turnIndicator(playerTurnIndicator[0]);
-	turnIndicator(playerTurnIndicator[1]);
+	// turnIndicator(playerTurnIndicator[0]);
+	// turnIndicator(playerTurnIndicator[2]);
 
 	if (remainingTurn % 2 !== 0) {
-		printTurn(e, "X");
-		if (isWinner("X")) {
-			xScore += 1;
-			playerScore[0].textContent = xScore;
+		printTurn(e, playerOne.mark);
+
+		if (isWinner(playerOne.mark)) {
+			incrementScore(playerOne);
 			return;
 		}
 	} else {
-		printTurn(e, "O");
+		printTurn(e, playerTwo.mark);
 
-		if (isWinner("O")) {
-			oScore += 1;
-			playerScore[1].textContent = oScore;
+		if (isWinner(playerTwo.mark)) {
+			incrementScore(playerTwo);
 			return;
 		}
 	}
 
 	if (remainingTurn === 1) {
-		resetIndicator(playerTurnIndicator[0]);
-		resetIndicator(playerTurnIndicator[1]);
+		// resetIndicator(playerTurnIndicator[0]);
+		// resetIndicator(playerTurnIndicator[2]);
+
+		incrementScore();
 		console.log("DRAW!");
 	}
+
+	logBoardHistory();
 }
 
 function checkColumn(mark) {
@@ -77,6 +78,7 @@ function isMatchWithPattern(board, mark) {
 function isWinner(mark) {
 	if (checkColumn(mark) || checkRow(mark) || checkDiagonal(mark)) {
 		announceWinner();
+
 		return true;
 	}
 }
@@ -85,6 +87,8 @@ function announceWinner() {
 	squares.forEach((square) =>
 		square.removeEventListener("click", gameSequence)
 	);
+
+	//add classList here that will show who wins
 	console.log("Winner!");
 }
 
@@ -100,7 +104,7 @@ function printTurn(e, mark) {
 function restartGame() {
 	squares.forEach((square) => {
 		square.textContent = "";
-		square.addEventListener("click", gameSequence, { once: true });
+		// square.addEventListener("click", gameSequence, { once: true });
 	});
 
 	board = [
@@ -109,20 +113,19 @@ function restartGame() {
 		["", "", ""],
 	];
 
-	resetIndicator(playerTurnIndicator[0]);
-	resetIndicator(playerTurnIndicator[1]);
-	turnIndicator(playerTurnIndicator[0]);
-}
+	resetBoardHistory();
+	logBoardHistory();
 
-function resetScore() {
-	xScore = oScore = playerScore[0].textContent = playerScore[1].textContent = 0;
+	// resetIndicator(playerTurnIndicator[0]);
+	// resetIndicator(playerTurnIndicator[2]);
+	// turnIndicator(playerTurnIndicator[0]);
 }
 
 const inGameEvent = () => {
-	squares.forEach((square) =>
-		square.addEventListener("click", gameSequence, { once: true })
+	squares.forEach(
+		(square) => square.addEventListener("click", gameSequence) // , { once: true }
 	);
 	restartButton.addEventListener("click", restartGame);
 };
 
-export { inGameEvent, resetScore };
+export { inGameEvent, restartGame, board };

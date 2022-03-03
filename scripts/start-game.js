@@ -5,7 +5,7 @@ import {
 	inGameContainer,
 } from "./constant.js";
 
-import { getNameFromInput } from "./input.js";
+import { getNameFromInput } from "./player.js";
 
 function startGameAnimation() {
 	topRowElement.classList.add("hide-transition");

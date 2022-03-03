@@ -101,6 +101,10 @@ button:hover {
   opacity: 0.9;
 }
 
+.-hide {
+  display: none;
+}
+
 .start-game {
   opacity: 1;
   text-align: center;
@@ -153,6 +157,7 @@ button:hover {
   border: solid red 1px;
   width: 100%;
   padding: 0 1rem;
+  flex-wrap: wrap;
 }
 .in-game.game {
   flex-direction: column;
@@ -215,12 +220,17 @@ button:hover {
   padding: 1rem 0;
   width: 23rem;
   transform: scale(1);
-  transition: transform linear 0.4s;
+  transition: transform 0.4s;
   display: flex;
   justify-content: center;
 }
 .turn-indicator.present-turn {
   transform: scale(1.2);
+}
+
+.tie {
+  width: 10rem;
+  border: solid black 3px;
 }
 
 @media screen and (max-width: 600px) {

@@ -14,3 +14,6 @@ export const playerTurnIndicator = document.querySelectorAll(".turn-indicator");
 export const playerScore = document.querySelectorAll(".score");
 
 export const returnButton = document.querySelector("#return");
+
+export const undoButton = document.querySelector("#undo");
+export const redoButton = document.querySelector("#redo");

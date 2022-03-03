@@ -40,11 +40,14 @@
 				<div class="in-game game -hide">
 					<p class="title">Tic-tac-toe</p>
 					<div class="turn">
-						<p class="turn-indicator present-turn">
+						<p class="turn-indicator">
 							<span id="player-one" class="name"></span>(X):&nbsp;<span
 								class="score"
 								>0</span
 							>
+						</p>
+						<p class="turn-indicator tie">
+							Tie:&nbsp;<span class="score">0</span>
 						</p>
 						<p class="turn-indicator">
 							<span id="player-two" class="player-one name"></span
@@ -71,9 +74,9 @@
 				<div class="in-game buttons -hide">
 					<button type="button" id="return">Return</button>
 					<div class="game-option">
-						<button type="button" id="prev">Previous</button>
+						<button type="button" id="undo">Undo</button>
 						<button type="button" id="restart">Restart</button>
-						<button type="button" id="next">Next</button>
+						<button type="button" id="redo">Redo</button>
 					</div>
 				</div>
 			</div>

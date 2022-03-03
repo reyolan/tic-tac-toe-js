@@ -5,7 +5,8 @@ import {
 	startGameContainer,
 } from "./constant.js";
 
-import { resetScore } from "./game.js";
+import { restartGame } from "./game.js";
+import { resetScore } from "./player.js";
 
 function returnToStartGame() {
 	inGameContainer.forEach((container) => {
@@ -23,6 +24,7 @@ function transitionInGametoStartGame(e) {
 		container.classList.remove("-hide")
 	);
 	resetScore();
+	restartGame();
 }
 
 const returnEvent = () =>
