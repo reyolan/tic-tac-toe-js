@@ -1,22 +1,30 @@
 import { undoButton, redoButton, squares } from "./constant.js";
 import { board } from "./game.js";
 
+//create object that will also log the score (para ma-undo mo rin yung score)
+// const history = {
+// boardState: [],
+//   playerOneScore:0,
+// playerTwoScore: 0,
+// }
+
+//lagay ka EventListener sa squares na kapag nag undo ka tapos nagclick ka na ng bagong turn lahat ng future indexes sa Array ay mawawala.
+
 let boardHistory = [];
 
 let turnNumber = -1;
-
-//flatten the array and then match the textContent of the squares
+let undoState = false;
 
 function logBoardHistory() {
 	boardHistory.push(board);
 	turnNumber += 1;
+	console.log(boardHistory);
 	// console.log(boardHistory[turnNumber]);
 	// console.log(turnNumber);
 }
 
 function printUndoRedoBoard(turnNumber) {
 	const board = boardHistory[turnNumber].flat();
-	console.log(turnNumber);
 
 	for (let i = 0; i < squares.length; i++) {
 		squares[i].textContent = board[i];
@@ -24,6 +32,7 @@ function printUndoRedoBoard(turnNumber) {
 }
 
 function undoMove(e) {
+	undoState = true;
 	turnNumber -= 1;
 	printUndoRedoBoard(turnNumber);
 	if (turnNumber === -1) {
@@ -34,14 +43,20 @@ function undoMove(e) {
 function redoMove() {
 	turnNumber += 1;
 	printUndoRedoBoard(turnNumber);
+	console.log("redomove", boardHistory);
 
 	if (turnNumber !== -1) {
 		undoButton.disabled = false;
 	}
 }
 
-function changeMove() {
-	turnNumber += 1;
+function removeFutureMoves() {
+	boardHistory = boardHistory.slice(0, turnNumber + 1);
+	undoState = false;
+}
+
+function passBoardState() {
+	return boardHistory[turnNumber];
 }
 
 // function togglePrevAndNextButton() {
@@ -59,4 +74,11 @@ const undoRedoEvent = () => {
 	redoButton.addEventListener("click", redoMove);
 };
 
-export { logBoardHistory, undoRedoEvent, resetBoardHistory };
+export {
+	logBoardHistory,
+	undoRedoEvent,
+	resetBoardHistory,
+	passBoardState,
+	removeFutureMoves,
+	undoState,
+};

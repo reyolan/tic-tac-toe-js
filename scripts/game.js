@@ -1,6 +1,12 @@
 import { squares, restartButton, playerTurnIndicator } from "./constant.js";
 import { turnIndicator, resetIndicator } from "./turn-indicator.js";
-import { logBoardHistory, resetBoardHistory } from "./history.js";
+import {
+	logBoardHistory,
+	resetBoardHistory,
+	passBoardState,
+	undoState,
+	removeFutureMoves,
+} from "./history.js";
 import { incrementScore, playerOne, playerTwo } from "./player.js";
 
 let board = [
@@ -16,21 +22,31 @@ logBoardHistory();
 function gameSequence(e) {
 	if (e.target.textContent !== "") return;
 
+	if (undoState) {
+		removeFutureMoves();
+	}
+
+	board = passBoardState();
+
 	const remainingTurn = board.flat().filter((element) => element === "").length;
+
 	// turnIndicator(playerTurnIndicator[0]);
 	// turnIndicator(playerTurnIndicator[2]);
 
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, playerOne.mark);
+		logBoardHistory();
+		//check for future move
 
-		if (isWinner(playerOne.mark)) {
+		if (isWinner(board, playerOne.mark)) {
 			incrementScore(playerOne);
 			return;
 		}
 	} else {
 		printTurn(e, playerTwo.mark);
+		logBoardHistory();
 
-		if (isWinner(playerTwo.mark)) {
+		if (isWinner(board, playerTwo.mark)) {
 			incrementScore(playerTwo);
 			return;
 		}
@@ -43,11 +59,9 @@ function gameSequence(e) {
 		incrementScore();
 		console.log("DRAW!");
 	}
-
-	logBoardHistory();
 }
 
-function checkColumn(mark) {
+function checkColumn(board, mark) {
 	const flatBoard = board.flat();
 	const columnOne = flatBoard.filter((_, i) => i % 3 === 0);
 	const columnTwo = flatBoard.slice(1, 9).filter((_, i) => i % 3 === 0);
@@ -57,11 +71,11 @@ function checkColumn(mark) {
 		return true;
 }
 
-function checkRow(mark) {
+function checkRow(board, mark) {
 	if (isMatchWithPattern(board, mark)) return true;
 }
 
-function checkDiagonal(mark) {
+function checkDiagonal(board, mark) {
 	const flatBoard = board.flat();
 	const diagonalOne = flatBoard.filter((_, i) => i % 4 === 0);
 	const diagonalTwo = flatBoard.slice(2, 8).filter((_, i) => i % 2 === 0);
@@ -75,8 +89,12 @@ function isMatchWithPattern(board, mark) {
 	}
 }
 
-function isWinner(mark) {
-	if (checkColumn(mark) || checkRow(mark) || checkDiagonal(mark)) {
+function isWinner(board, mark) {
+	if (
+		checkColumn(board, mark) ||
+		checkRow(board, mark) ||
+		checkDiagonal(board, mark)
+	) {
 		announceWinner();
 
 		return true;
@@ -85,9 +103,13 @@ function isWinner(mark) {
 
 function announceWinner() {
 	squares.forEach((square) =>
-		square.removeEventListener("click", gameSequence)
+		square.removeEventListener(
+			"click",
+			square.addEventListener("click", (e) => {
+				gameSequence(e);
+			})
+		)
 	);
-
 	//add classList here that will show who wins
 	console.log("Winner!");
 }
@@ -104,16 +126,17 @@ function printTurn(e, mark) {
 function restartGame() {
 	squares.forEach((square) => {
 		square.textContent = "";
-		// square.addEventListener("click", gameSequence, { once: true });
+		square.addEventListener("click", (e) => {
+			gameSequence(e);
+		});
 	});
 
+	resetBoardHistory();
 	board = [
 		["", "", ""],
 		["", "", ""],
 		["", "", ""],
 	];
-
-	resetBoardHistory();
 	logBoardHistory();
 
 	// resetIndicator(playerTurnIndicator[0]);
@@ -121,9 +144,18 @@ function restartGame() {
 	// turnIndicator(playerTurnIndicator[0]);
 }
 
+// function undoWinner() {
+// 	winner = false;
+// 	squares.forEach((square) => square.addEventListener("click", gameSequence));
+// 	//decrement score
+// }
+
 const inGameEvent = () => {
 	squares.forEach(
-		(square) => square.addEventListener("click", gameSequence) // , { once: true }
+		(square) =>
+			square.addEventListener("click", (e) => {
+				gameSequence(e);
+			}) // , { once: true }
 	);
 	restartButton.addEventListener("click", restartGame);
 };

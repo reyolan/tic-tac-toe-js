@@ -43,10 +43,33 @@ function incrementScore(player = "tie") {
 	}
 }
 
+function decrementScore(player = "tie") {
+	if (player === "tie") {
+		tieScore -= 1;
+		playerScore[1].textContent = tieScore;
+		return;
+	}
+
+	player.score -= 1;
+
+	if (player === playerOne) {
+		playerScore[0].textContent = player.score;
+	} else {
+		playerScore[2].textContent = player.score;
+	}
+}
+
 function resetScore() {
 	playerScore[0].textContent = playerOne.score = 0;
 	playerScore[1].textContent = tieScore = 0;
 	playerScore[2].textContent = playerTwo.score = 0;
 }
 
-export { getNameFromInput, incrementScore, resetScore, playerOne, playerTwo };
+export {
+	getNameFromInput,
+	incrementScore,
+	decrementScore,
+	resetScore,
+	playerOne,
+	playerTwo,
+};
