@@ -7,12 +7,16 @@ import {
 
 import { restartGame } from "./game.js";
 import { resetScore } from "./player.js";
+import { clearMoveList } from "./move-list.js";
 
 function returnToStartGame() {
 	inGameContainer.forEach((container) => {
 		container.classList.add("hide-transition");
 		container.addEventListener("transitionend", transitionInGametoStartGame);
 	});
+	resetScore();
+	restartGame();
+	clearMoveList();
 }
 
 function transitionInGametoStartGame(e) {
@@ -23,9 +27,6 @@ function transitionInGametoStartGame(e) {
 	startGameContainer.forEach((container) =>
 		container.classList.remove("-hide")
 	);
-	resetScore();
-	restartGame();
-	clearMoveList();
 }
 
 const returnEvent = () =>

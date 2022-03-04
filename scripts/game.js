@@ -58,8 +58,8 @@ function gameSequence(e) {
 function checkColumn(board, mark) {
 	const flatBoard = board.flat();
 	const columnOne = flatBoard.filter((_, i) => i % 3 === 0);
-	const columnTwo = flatBoard.slice(1, 9).filter((_, i) => i % 3 === 0);
-	const columnThree = flatBoard.slice(2, 9).filter((_, i) => i % 3 === 0);
+	const columnTwo = flatBoard.slice(1).filter((_, i) => i % 3 === 0);
+	const columnThree = flatBoard.slice(2).filter((_, i) => i % 3 === 0);
 
 	if (isMatchWithPattern([columnOne, columnTwo, columnThree], mark))
 		return true;
@@ -110,7 +110,7 @@ function printTurn(e, mark) {
 
 	addToMoveList(index, mark);
 
-	board = [flatBoard.slice(0, 3), flatBoard.slice(3, 6), flatBoard.slice(6, 9)];
+	board = [flatBoard.slice(0, 3), flatBoard.slice(3, 6), flatBoard.slice(6)];
 }
 
 function restartGame() {

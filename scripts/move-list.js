@@ -47,9 +47,10 @@ function deleteFutureMovesInMoveList(index) {
 }
 
 function clearMoveList() {
-	while (moveListElement.firstChild) {
-		moveListElement.removeChild(moveListElement.firstChild);
-	}
+	moveListElement.innerHTML = "";
+	// while (moveListElement.firstChild) {
+	// 	moveListElement.removeChild(moveListElement.firstChild);
+	// }
 }
 
 const showMoveListEvent = () =>

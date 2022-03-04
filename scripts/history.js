@@ -4,24 +4,23 @@ import { deleteFutureMovesInMoveList, highlightMove } from "./move-list.js";
 import { adjustScore } from "./player.js";
 
 //create object that will also log the score (para ma-undo mo rin yung score)
-// const history = {
+// const gameState = {
 // boardState: [],
 //   playerOneScore:0,
 // playerTwoScore: 0,
-// }
-
-//lagay ka EventListener sa squares na kapag nag undo ka tapos nagclick ka na ng
-//bagong turn lahat ng future indexes sa Array ay mawawala.
+// tieScore: 0
+// } ---> tapos kada access ng index, ipiprint natin sa respective textContent
 
 let undoState = false;
 
 let boardHistory = [];
-let turnNumber = -1;
+let turnCounter = -1;
+
 function logBoardHistory() {
 	boardHistory.push(board);
-	turnNumber += 1;
+	turnCounter += 1;
 
-	if (turnNumber > 0) highlightMove(turnNumber - 1);
+	if (turnCounter > 0) highlightMove(turnCounter - 1);
 
 	toggleUndoRedoButton();
 }
@@ -40,43 +39,44 @@ function printUndoRedoBoard(turnNumber) {
 
 function undoMove() {
 	undoState = true;
-	turnNumber -= 1;
-	printUndoRedoBoard(turnNumber);
+	turnCounter -= 1;
+	printUndoRedoBoard(turnCounter);
 	toggleUndoRedoButton();
 
-	if (turnNumber > 0) highlightMove(turnNumber - 1);
+	if (turnCounter > 0) highlightMove(turnCounter - 1);
 
-	//create an if else condition for winnerState variable to decrease score when won
+	//create an if else condition for winnerState (from game.js) variable to decrease score when already won,
+	//store mo rin sa variable inside game.js kung sino nanalo para ma - input sa decrementScore kung sino idedecrement.
 
 	squares.forEach((square) => square.addEventListener("click", gameSequence));
 }
 
 function redoMove() {
-	turnNumber += 1;
-	printUndoRedoBoard(turnNumber);
+	turnCounter += 1;
+	printUndoRedoBoard(turnCounter);
 	toggleUndoRedoButton();
-	highlightMove(turnNumber - 1);
+	highlightMove(turnCounter - 1);
 }
 
 function removeFutureBoardStates() {
-	boardHistory = boardHistory.slice(0, turnNumber + 1);
-	deleteFutureMovesInMoveList(turnNumber);
+	boardHistory = boardHistory.slice(0, turnCounter + 1);
+	deleteFutureMovesInMoveList(turnCounter);
 	undoState = false;
 }
 
 function passBoardState() {
-	return boardHistory[turnNumber];
+	return boardHistory[turnCounter];
 }
 
 function resetBoardHistory() {
 	boardHistory = [];
-	turnNumber = -1;
+	turnCounter = -1;
 }
 
 function toggleUndoRedoButton() {
-	undoButton.disabled = turnNumber === 0 ? true : false;
+	undoButton.disabled = turnCounter === 0 ? true : false;
 	redoButton.disabled =
-		boardHistory[turnNumber + 1] === undefined ? true : false;
+		boardHistory[turnCounter + 1] === undefined ? true : false;
 }
 
 const undoRedoEvent = () => {
