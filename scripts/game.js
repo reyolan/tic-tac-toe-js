@@ -5,17 +5,13 @@ import {
 	resetBoardHistory,
 	passBoardState,
 	undoState,
-	removeFutureMoves,
+	removeFutureBoardStates,
 } from "./history.js";
-import { incrementScore, playerOne, playerTwo } from "./player.js";
+import { adjustScore, playerOne, playerTwo } from "./player.js";
+import { addToMoveList, clearMoveList } from "./move-list.js";
 
-let board = [
-	["", "", ""],
-	["", "", ""],
-	["", "", ""],
-];
-
-logBoardHistory();
+let board;
+initializeBoard();
 
 //print to DOM
 
@@ -23,7 +19,7 @@ function gameSequence(e) {
 	if (e.target.textContent !== "") return;
 
 	if (undoState) {
-		removeFutureMoves();
+		removeFutureBoardStates();
 	}
 
 	board = passBoardState();
@@ -36,10 +32,9 @@ function gameSequence(e) {
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, playerOne.mark);
 		logBoardHistory();
-		//check for future move
 
 		if (isWinner(board, playerOne.mark)) {
-			incrementScore(playerOne);
+			adjustScore("increment", playerOne);
 			return;
 		}
 	} else {
@@ -47,7 +42,7 @@ function gameSequence(e) {
 		logBoardHistory();
 
 		if (isWinner(board, playerTwo.mark)) {
-			incrementScore(playerTwo);
+			adjustScore("increment", playerTwo);
 			return;
 		}
 	}
@@ -55,8 +50,7 @@ function gameSequence(e) {
 	if (remainingTurn === 1) {
 		// resetIndicator(playerTurnIndicator[0]);
 		// resetIndicator(playerTurnIndicator[2]);
-
-		incrementScore();
+		adjustScore("increment");
 		console.log("DRAW!");
 	}
 }
@@ -96,19 +90,13 @@ function isWinner(board, mark) {
 		checkDiagonal(board, mark)
 	) {
 		announceWinner();
-
 		return true;
 	}
 }
 
 function announceWinner() {
 	squares.forEach((square) =>
-		square.removeEventListener(
-			"click",
-			square.addEventListener("click", (e) => {
-				gameSequence(e);
-			})
-		)
+		square.removeEventListener("click", gameSequence)
 	);
 	//add classList here that will show who wins
 	console.log("Winner!");
@@ -120,28 +108,33 @@ function printTurn(e, mark) {
 	e.target.textContent = mark;
 	flatBoard[index] = mark;
 
+	addToMoveList(index, mark);
+
 	board = [flatBoard.slice(0, 3), flatBoard.slice(3, 6), flatBoard.slice(6, 9)];
 }
 
 function restartGame() {
+	resetBoardHistory();
+	clearMoveList();
+	initializeBoard();
+
 	squares.forEach((square) => {
 		square.textContent = "";
-		square.addEventListener("click", (e) => {
-			gameSequence(e);
-		});
+		square.addEventListener("click", gameSequence);
 	});
 
-	resetBoardHistory();
+	// resetIndicator(playerTurnIndicator[0]);
+	// resetIndicator(playerTurnIndicator[2]);
+	// turnIndicator(playerTurnIndicator[0]);
+}
+
+function initializeBoard() {
 	board = [
 		["", "", ""],
 		["", "", ""],
 		["", "", ""],
 	];
 	logBoardHistory();
-
-	// resetIndicator(playerTurnIndicator[0]);
-	// resetIndicator(playerTurnIndicator[2]);
-	// turnIndicator(playerTurnIndicator[0]);
 }
 
 // function undoWinner() {
@@ -151,13 +144,9 @@ function restartGame() {
 // }
 
 const inGameEvent = () => {
-	squares.forEach(
-		(square) =>
-			square.addEventListener("click", (e) => {
-				gameSequence(e);
-			}) // , { once: true }
-	);
+	squares.forEach((square) => square.addEventListener("click", gameSequence));
+
 	restartButton.addEventListener("click", restartGame);
 };
 
-export { inGameEvent, restartGame, board };
+export { inGameEvent, restartGame, board, gameSequence };

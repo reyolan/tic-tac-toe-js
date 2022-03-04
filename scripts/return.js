@@ -25,6 +25,7 @@ function transitionInGametoStartGame(e) {
 	);
 	resetScore();
 	restartGame();
+	clearMoveList();
 }
 
 const returnEvent = () =>

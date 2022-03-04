@@ -27,30 +27,14 @@ function getNameFromInput() {
 	playerTwo.name = playerTwoName.textContent = inputNames[1].value;
 }
 
-function incrementScore(player = "tie") {
+function adjustScore(operator, player = "tie") {
 	if (player === "tie") {
-		tieScore += 1;
+		operator === "increment" ? (tieScore += 1) : (tieScore -= 1);
 		playerScore[1].textContent = tieScore;
 		return;
 	}
-
-	player.score += 1;
-
-	if (player === playerOne) {
-		playerScore[0].textContent = player.score;
-	} else {
-		playerScore[2].textContent = player.score;
-	}
-}
-
-function decrementScore(player = "tie") {
-	if (player === "tie") {
-		tieScore -= 1;
-		playerScore[1].textContent = tieScore;
-		return;
-	}
-
-	player.score -= 1;
+	//gawa tayo parameter na increment decrement
+	operator === "increment" ? (player.score += 1) : (player.score -= 1);
 
 	if (player === playerOne) {
 		playerScore[0].textContent = player.score;
@@ -65,11 +49,4 @@ function resetScore() {
 	playerScore[2].textContent = playerTwo.score = 0;
 }
 
-export {
-	getNameFromInput,
-	incrementScore,
-	decrementScore,
-	resetScore,
-	playerOne,
-	playerTwo,
-};
+export { getNameFromInput, adjustScore, resetScore, playerOne, playerTwo };

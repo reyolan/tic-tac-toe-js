@@ -17,3 +17,7 @@ export const returnButton = document.querySelector("#return");
 
 export const undoButton = document.querySelector("#undo");
 export const redoButton = document.querySelector("#redo");
+
+export const historyButton = document.querySelector("#history");
+export const moveListContainer = document.querySelector(".history-list");
+export const moveListElement = document.querySelector("ol");
