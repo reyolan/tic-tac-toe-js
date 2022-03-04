@@ -21,6 +21,8 @@ function logBoardHistory() {
 	boardHistory.push(board);
 	turnNumber += 1;
 
+	if (turnNumber > 0) highlightMove(turnNumber - 1);
+
 	toggleUndoRedoButton();
 }
 
@@ -41,8 +43,8 @@ function undoMove() {
 	turnNumber -= 1;
 	printUndoRedoBoard(turnNumber);
 	toggleUndoRedoButton();
-	console.log(turnNumber);
-	highlightMove(turnNumber - 1);
+
+	if (turnNumber > 0) highlightMove(turnNumber - 1);
 
 	//create an if else condition for winnerState variable to decrease score when won
 
@@ -58,18 +60,13 @@ function redoMove() {
 
 function removeFutureBoardStates() {
 	boardHistory = boardHistory.slice(0, turnNumber + 1);
-	deleteFutureMovesInMoveList(turnNumber + 1);
+	deleteFutureMovesInMoveList(turnNumber);
 	undoState = false;
 }
 
 function passBoardState() {
 	return boardHistory[turnNumber];
 }
-
-// function togglePrevAndNextButton() {
-// 	prevButton.classList.toggle("-hide");
-// 	nextButton.classList.toggle("-hide");
-// }
 
 function resetBoardHistory() {
 	boardHistory = [];

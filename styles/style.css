@@ -264,7 +264,8 @@ button:hover {
 }
 
 .highlight {
-  background: black;
+  background-color: black;
+  transition: background-color 0.5s;
 }
 
 @media screen and (max-width: 600px) {

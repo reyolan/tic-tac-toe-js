@@ -16,13 +16,12 @@ function showMoveList() {
 }
 
 function addToMoveList(index, mark) {
-	[...moveListElement.children].forEach((movement) =>
-		movement.classList.remove("highlight")
-	);
+	// [...moveListElement.children].forEach((movement) =>
+	// 	movement.classList.remove("highlight")
+	// );
 
 	const li = document.createElement("li");
 	li.textContent = `${mark} @ ${legend.flat()[index]}`;
-	li.classList.add("highlight");
 	moveListElement.appendChild(li);
 }
 
@@ -32,22 +31,24 @@ function highlightMove(index) {
 		movement.classList.remove("highlight")
 	);
 
-	// console.log(moveListElement.children[0].classList);
 	moveListElement.children[index].classList.add("highlight");
-}
-
-function clearMoveList() {
-	while (moveListElement.firstChild) {
-		moveListElement.removeChild(moveListElement.firstChild);
-	}
 }
 
 function deleteFutureMovesInMoveList(index) {
 	// moveListElement.children = [...moveListElement.children].slice(0, index);
 	// console.log([...moveListElement.children].slice(0, index));
+	// for (let i = 0; i <= index; i++) {
+	// 	moveListElement.removeChild(moveListElement.lastChild);
+	// }
 
-	for (let i = 0; i <= index; i++) {
-		moveListElement.removeChild(moveListElement.lastChild);
+	[...moveListElement.children].forEach((movement, i) => {
+		if (i >= index) movement.remove(); //i >= index - 1
+	});
+}
+
+function clearMoveList() {
+	while (moveListElement.firstChild) {
+		moveListElement.removeChild(moveListElement.firstChild);
 	}
 }
 
