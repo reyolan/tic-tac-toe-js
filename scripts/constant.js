@@ -21,3 +21,5 @@ export const redoButton = document.querySelector("#redo");
 export const historyButton = document.querySelector("#history");
 export const moveListContainer = document.querySelector(".history-list");
 export const moveListElement = document.querySelector("ol");
+
+export const inputNameDiv = document.querySelectorAll(".input-div");

@@ -16,21 +16,40 @@
 	background-color: rgb(90, 216, 90);
 }
 
+.question {
+	margin-top: 1rem;
+}
+
 .input-name-container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 5rem;
 	margin-top: 1rem;
+	user-select: none;
 
-	> div {
+	.input-div {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		gap: 3rem;
-		border: solid black 2px;
+		border: solid darkgray 4px;
 		border-radius: 5px;
 		padding: 1rem;
+		margin-top: 2rem;
+		transform: scale(1);
+		transition: transform 0.4s;
+		cursor: pointer;
+	}
+
+	.input-div:hover {
+		border: solid black 4px;
+	}
+
+	.input-div.choose {
+		transform: scale(1.2);
+		border: solid black 4px;
+		transition: transform 0.4s;
 	}
 }

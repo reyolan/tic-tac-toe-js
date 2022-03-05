@@ -3,6 +3,7 @@ import {
 	startGameButton,
 	startGameContainer,
 	inGameContainer,
+	inputNameDiv,
 } from "./constant.js";
 
 import { getNameFromInput } from "./player.js";

@@ -1,18 +1,27 @@
 import { squares, restartButton, playerTurnIndicator } from "./constant.js";
+import {
+	changeScoreFromState,
+	playerOne,
+	playerTwo,
+	tieScore,
+} from "./player.js";
 import { turnIndicator, resetIndicator } from "./turn-indicator.js";
 import {
-	logBoardHistory,
+	logGameState,
 	resetBoardHistory,
 	passBoardState,
 	undoState,
 	removeFutureBoardStates,
+	gameHistory,
+	incrementScore,
 } from "./history.js";
-import { adjustScore, playerOne, playerTwo } from "./player.js";
+
 import { addToMoveList, clearMoveList } from "./move-list.js";
 
 let board;
 initializeBoard();
 
+let winnerState = false;
 //print to DOM
 
 function gameSequence(e) {
@@ -31,18 +40,18 @@ function gameSequence(e) {
 
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, playerOne.mark);
-		logBoardHistory();
 
 		if (isWinner(board, playerOne.mark)) {
-			adjustScore("increment", playerOne);
+			// adjustScore("increment", playerOne);
+			incrementScore("playerOneScore");
 			return;
 		}
 	} else {
 		printTurn(e, playerTwo.mark);
-		logBoardHistory();
 
 		if (isWinner(board, playerTwo.mark)) {
-			adjustScore("increment", playerTwo);
+			incrementScore("playerTwoScore");
+			// adjustScore("increment", playerTwo);
 			return;
 		}
 	}
@@ -50,7 +59,8 @@ function gameSequence(e) {
 	if (remainingTurn === 1) {
 		// resetIndicator(playerTurnIndicator[0]);
 		// resetIndicator(playerTurnIndicator[2]);
-		adjustScore("increment");
+		// adjustScore("increment");
+		incrementScore();
 		console.log("DRAW!");
 	}
 }
@@ -90,6 +100,7 @@ function isWinner(board, mark) {
 		checkDiagonal(board, mark)
 	) {
 		announceWinner();
+		winnerState = true;
 		return true;
 	}
 }
@@ -111,9 +122,26 @@ function printTurn(e, mark) {
 	addToMoveList(index, mark);
 
 	board = [flatBoard.slice(0, 3), flatBoard.slice(3, 6), flatBoard.slice(6)];
+	logGameState({
+		board: board,
+		playerOneScore: playerOne.score,
+		playerTwoScore: playerTwo.score,
+		tieScore: tieScore,
+	});
 }
 
 function restartGame() {
+	// lagay lang ng winnerState variable?
+	// ilagay kaya natin sa player.js tapos import from history.js yung gameHistory(?) para machange talaga yung score since bawal ka magre-assign.
+	if (winnerState && !undoState) {
+		changeScoreFromState(
+			gameHistory[gameHistory.length - 1].playerOneScore,
+			gameHistory[gameHistory.length - 1].playerTwoScore,
+			gameHistory[gameHistory.length - 1].tieScore
+		);
+		winnerState = false;
+	}
+
 	resetBoardHistory();
 	clearMoveList();
 	initializeBoard();
@@ -134,7 +162,13 @@ function initializeBoard() {
 		["", "", ""],
 		["", "", ""],
 	];
-	logBoardHistory();
+
+	logGameState({
+		board: board,
+		playerOneScore: playerOne.score,
+		playerTwoScore: playerTwo.score,
+		tieScore: tieScore,
+	});
 }
 
 // function undoWinner() {

@@ -14,8 +14,8 @@ function returnToStartGame() {
 		container.classList.add("hide-transition");
 		container.addEventListener("transitionend", transitionInGametoStartGame);
 	});
-	resetScore();
 	restartGame();
+	resetScore();
 	clearMoveList();
 }
 
