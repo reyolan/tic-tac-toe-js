@@ -6,7 +6,7 @@ import {
 	inputNameDiv,
 } from "./constant.js";
 
-import { getNameFromInput } from "./player.js";
+import { firstTurn, getNameFromInput } from "./player.js";
 
 function startGameAnimation() {
 	topRowElement.classList.add("hide-transition");
@@ -40,6 +40,7 @@ function inGameAnimation() {
 function startGame() {
 	startGameAnimation();
 	getNameFromInput();
+	firstTurn();
 }
 
 const startGameEvent = () => {

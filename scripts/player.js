@@ -2,7 +2,9 @@ import {
 	inputNameDiv,
 	inputNames,
 	playerOneName,
+	playerOneMark,
 	playerTwoName,
+	playerTwoMark,
 	playerScore,
 } from "./constant.js";
 
@@ -14,34 +16,31 @@ import {
 
 const playerOne = {
 	name: "",
-	mark: "X",
+	mark: "",
 	score: 0,
 };
 
 const playerTwo = {
 	name: "",
-	mark: "O",
+	mark: "",
 	score: 0,
 };
 
 let tieScore = 0;
 
-function chooseFirstTurnTransition() {
-	inputNameDiv.forEach((div) => div.classList.toggle("choose"));
-}
-
 function firstTurn() {
-	//parang if index === 0 yung may class na 'choose' playerOne.mark = 'X'
-
-	for (const element of inputNameDiv) {
-		if (element.classList.contains('choose')) {playerOne.mark = }
-	}
+	playerOne.mark = playerOneMark.textContent =
+		inputNameDiv[0].classList.contains("choose") ? "X" : "O";
+	playerTwo.mark = playerTwoMark.textContent =
+		inputNameDiv[0].classList.contains("choose") ? "O" : "X";
 }
 
 function getNameFromInput() {
-	//kung sino yung may choose na class, ayun yung magiging player one
-	playerOne.name = playerOneName.textContent = inputNames[0].value;
-	playerTwo.name = playerTwoName.textContent = inputNames[1].value;
+	const i = inputNameDiv[0].classList.contains("choose") ? 0 : 1;
+	const j = inputNameDiv[0].classList.contains("choose") ? 1 : 0;
+
+	playerOne.name = playerOneName.textContent = inputNames[i].value;
+	playerTwo.name = playerTwoName.textContent = inputNames[j].value;
 }
 
 // function adjustScore(operator, player = "tie") {
@@ -68,12 +67,6 @@ function resetScore() {
 	playerScore[2].textContent = playerTwo.score = 0;
 }
 
-// function getScoreFromState() {
-// 	playerOne.score = gameHistory[gameHistory - 1].playerOneScore;
-// 	playerTwo.score = gameHistory[gameHistory - 1].playerTwoScore;
-// 	tieScore = gameHistory[gameHistory - 1].tieScore;
-// }
-
 function changeScoreFromState(
 	playerOneScoreState,
 	playerTwoScoreState,
@@ -85,9 +78,19 @@ function changeScoreFromState(
 }
 
 const chooseFirstEvent = () => {
-	inputNameDiv.forEach((div) =>
-		div.addEventListener("click", chooseFirstTurnTransition)
-	);
+	inputNameDiv[0].addEventListener("click", (e) => {
+		if (e.target === e.currentTarget) {
+			e.target.classList.add("choose");
+			e.target.nextElementSibling.classList.remove("choose");
+		}
+	});
+
+	inputNameDiv[1].addEventListener("click", (e) => {
+		if (e.target === e.currentTarget) {
+			e.target.classList.add("choose");
+			e.target.previousElementSibling.classList.remove("choose");
+		}
+	});
 };
 
 export {
@@ -98,4 +101,5 @@ export {
 	resetScore,
 	changeScoreFromState,
 	chooseFirstEvent,
+	firstTurn,
 };
