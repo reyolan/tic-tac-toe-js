@@ -25,3 +25,7 @@ export const moveListContainer = document.querySelector(".history-list");
 export const moveListElement = document.querySelector("ol");
 
 export const inputNameDiv = document.querySelectorAll(".input-div");
+
+export const continueButton = document.querySelector("#continue");
+export const modalWinner = document.querySelector(".modal-winner");
+export const winnerText = document.querySelector(".modal-winner > p");

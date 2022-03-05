@@ -3,23 +3,6 @@ import { gameSequence } from "./game.js";
 
 import { deleteFutureMovesInMoveList, highlightMove } from "./move-list.js";
 
-//create object that will also log the score (para ma-undo mo rin yung score)
-// const gameState = {
-// boardState: [],
-//   playerOneScore:0,
-// playerTwoScore: 0,
-// tieScore: 0
-// } ---> tapos kada access ng index, ipiprint natin sa respective textContent
-
-//let's say we have [ {...}, {...}], at the last index, we shall have a condition,
-//if (winner && nagclick ng restart) --> doon iincrement yung totoong score.
-
-//don sa mismong game, magincrement ka palang sa score sa mismong state pa lang,
-//wag muna sa mismong variable na totoong score, which the playerOne.score and playerTwo.score and tieScore
-
-//Kada new game, kukunin mo yung initial state score sa mismong playerOne.score, playerTwo.score and tieScore
-
-// dapat ang pinupush mo sa gameState ay isang object {board: [], playerOneScore, playerTwoScore, tieScore}
 let undoState = false;
 
 let gameHistory = [];
@@ -34,10 +17,6 @@ function logGameState(gameState) {
 
 	toggleUndoRedoButton();
 }
-
-// console.log(boardHistory);
-// console.log(boardHistory[turnNumber]);
-// console.log(turnNumber);
 
 function printPresentGameState(turnCounter) {
 	const state = gameHistory[turnCounter];
@@ -60,9 +39,6 @@ function undoMove() {
 	toggleUndoRedoButton();
 
 	if (turnCounter > 0) highlightMove(turnCounter - 1);
-
-	//create an if else condition for winnerState (from game.js) variable to decrease score when already won,
-	//store mo rin sa variable inside game.js kung sino nanalo para ma - input sa decrementScore kung sino idedecrement.
 
 	squares.forEach((square) => square.addEventListener("click", gameSequence));
 }

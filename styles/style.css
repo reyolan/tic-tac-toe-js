@@ -63,6 +63,11 @@ button {
   font-size: 2.8rem;
 }
 
+.modal-winner {
+  font-size: 10rem;
+  color: white;
+}
+
 @media screen and (max-width: 600px) {
   .title {
     font-size: 5.4rem;
@@ -79,6 +84,7 @@ button {
   justify-content: space-between;
   gap: 5rem;
   animation: 1.3s ease-out 1 fadein;
+  position: relative;
 }
 
 .top {
@@ -113,6 +119,18 @@ button {
 }
 button:hover {
   opacity: 0.9;
+}
+
+.modal-winner {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 
 .-hide {

@@ -1,4 +1,11 @@
-import { squares, restartButton, playerTurnIndicator } from "./constant.js";
+import {
+	squares,
+	restartButton,
+	playerTurnIndicator,
+	modalWinner,
+	winnerText,
+	continueButton,
+} from "./constant.js";
 import {
 	changeScoreFromState,
 	playerOne,
@@ -41,17 +48,15 @@ function gameSequence(e) {
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, playerOne.mark);
 
-		if (isWinner(board, playerOne.mark)) {
-			// adjustScore("increment", playerOne);
+		if (isWinner(board, playerOne.mark, playerOne.name)) {
 			incrementScore("playerOneScore");
 			return;
 		}
 	} else {
 		printTurn(e, playerTwo.mark);
 
-		if (isWinner(board, playerTwo.mark)) {
+		if (isWinner(board, playerTwo.mark, playerTwo.name)) {
 			incrementScore("playerTwoScore");
-			// adjustScore("increment", playerTwo);
 			return;
 		}
 	}
@@ -59,9 +64,9 @@ function gameSequence(e) {
 	if (remainingTurn === 1) {
 		// resetIndicator(playerTurnIndicator[0]);
 		// resetIndicator(playerTurnIndicator[2]);
-		// adjustScore("increment");
+
 		incrementScore();
-		console.log("DRAW!");
+		announceWinner();
 	}
 }
 
@@ -93,24 +98,30 @@ function isMatchWithPattern(board, mark) {
 	}
 }
 
-function isWinner(board, mark) {
+function isWinner(board, mark, name) {
 	if (
 		checkColumn(board, mark) ||
 		checkRow(board, mark) ||
 		checkDiagonal(board, mark)
 	) {
-		announceWinner();
+		announceWinner(mark, name);
 		winnerState = true;
 		return true;
 	}
 }
 
-function announceWinner() {
+function announceWinner(mark = "", name = "") {
 	squares.forEach((square) =>
 		square.removeEventListener("click", gameSequence)
 	);
-	//add classList here that will show who wins
-	console.log("Winner!");
+
+	modalWinner.classList.remove("-hide");
+	if (!mark && !name) {
+		winnerText.textContent = `DRAW!`;
+		return;
+	}
+
+	winnerText.textContent = `${name} (${mark}) WINS!`;
 }
 
 function printTurn(e, mark) {
@@ -131,8 +142,6 @@ function printTurn(e, mark) {
 }
 
 function restartGame() {
-	// lagay lang ng winnerState variable?
-	// ilagay kaya natin sa player.js tapos import from history.js yung gameHistory(?) para machange talaga yung score since bawal ka magre-assign.
 	if (winnerState && !undoState) {
 		changeScoreFromState(
 			gameHistory[gameHistory.length - 1].playerOneScore,
@@ -171,16 +180,12 @@ function initializeBoard() {
 	});
 }
 
-// function undoWinner() {
-// 	winner = false;
-// 	squares.forEach((square) => square.addEventListener("click", gameSequence));
-// 	//decrement score
-// }
-
 const inGameEvent = () => {
 	squares.forEach((square) => square.addEventListener("click", gameSequence));
-
 	restartButton.addEventListener("click", restartGame);
+	continueButton.addEventListener("click", () =>
+		modalWinner.classList.add("-hide")
+	);
 };
 
 export { inGameEvent, restartGame, board, gameSequence };
