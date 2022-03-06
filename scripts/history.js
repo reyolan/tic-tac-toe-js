@@ -63,7 +63,7 @@ function redoMove() {
 		);
 }
 
-function removeFutureBoardStates() {
+function removeFutureGameStates() {
 	gameHistory = gameHistory.slice(0, turnCounter + 1);
 	deleteFutureMovesInMoveList(turnCounter);
 	undoState = false;
@@ -109,7 +109,7 @@ export {
 	undoRedoEvent,
 	resetBoardHistory,
 	passBoardState,
-	removeFutureBoardStates,
+	removeFutureGameStates,
 	toggleUndoRedoButton,
 	incrementScore,
 	gameHistory,

@@ -18,7 +18,7 @@ import {
 	resetBoardHistory,
 	passBoardState,
 	undoState,
-	removeFutureBoardStates,
+	removeFutureGameStates,
 	gameHistory,
 	incrementScore,
 } from "./history.js";
@@ -34,7 +34,7 @@ function gameSequence(e) {
 	if (e.target.textContent !== "") return;
 
 	if (undoState) {
-		removeFutureBoardStates();
+		removeFutureGameStates();
 	}
 
 	board = passBoardState();
@@ -73,12 +73,11 @@ function checkColumn(board, mark) {
 	const columnTwo = flatBoard.slice(1).filter((_, i) => i % 3 === 0);
 	const columnThree = flatBoard.slice(2).filter((_, i) => i % 3 === 0);
 
-	if (isMatchWithPattern([columnOne, columnTwo, columnThree], mark))
-		return true;
+	return isMatchWithPattern([columnOne, columnTwo, columnThree], mark);
 }
 
 function checkRow(board, mark) {
-	if (isMatchWithPattern(board, mark)) return true;
+	return isMatchWithPattern(board, mark);
 }
 
 function checkDiagonal(board, mark) {
@@ -86,7 +85,7 @@ function checkDiagonal(board, mark) {
 	const diagonalOne = flatBoard.filter((_, i) => i % 4 === 0);
 	const diagonalTwo = flatBoard.slice(2, 8).filter((_, i) => i % 2 === 0);
 
-	if (isMatchWithPattern([diagonalOne, diagonalTwo], mark)) return true;
+	return isMatchWithPattern([diagonalOne, diagonalTwo], mark);
 }
 
 function isMatchWithPattern(board, mark) {
@@ -124,8 +123,7 @@ function announceWinner(mark = "", name = "") {
 function printTurn(e, mark) {
 	const index = [...e.target.parentElement.children].indexOf(e.target);
 	let flatBoard = board.flat();
-	e.target.textContent = mark;
-	flatBoard[index] = mark;
+	e.target.textContent = flatBoard[index] = mark;
 
 	addToMoveList(index, mark);
 
@@ -184,4 +182,4 @@ const inGameEvent = () => {
 	);
 };
 
-export { inGameEvent, restartGame, board, gameSequence, winnerState };
+export { inGameEvent, restartGame, gameSequence, board, winnerState };
