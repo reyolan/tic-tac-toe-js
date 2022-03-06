@@ -60,8 +60,6 @@ function gameSequence(e) {
 	}
 
 	if (remainingTurn === 1) {
-		resetIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
-
 		incrementScore();
 		announceWinner();
 	}
