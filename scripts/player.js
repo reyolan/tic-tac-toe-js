@@ -39,11 +39,11 @@ function getNameFromInput() {
 
 function resetScore() {
 	playerScore[0].textContent =
-		playerOne.score =
 		playerScore[1].textContent =
-		tieScore =
 		playerScore[2].textContent =
+		playerOne.score =
 		playerTwo.score =
+		tieScore =
 			0;
 }
 

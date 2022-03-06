@@ -55,12 +55,12 @@ function redoMove() {
 	printPresentGameState(turnCounter);
 	toggleUndoRedoButton();
 	highlightMove(turnCounter - 1);
-	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 
 	if (winnerState)
 		squares.forEach((square) =>
 			square.removeEventListener("click", gameSequence)
 		);
+	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 }
 
 function removeFutureGameStates() {
