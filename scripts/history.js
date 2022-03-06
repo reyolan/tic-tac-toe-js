@@ -1,5 +1,12 @@
-import { undoButton, redoButton, squares, playerScore } from "./constant.js";
+import {
+	undoButton,
+	redoButton,
+	squares,
+	playerScore,
+	playerTurnIndicator,
+} from "./constant.js";
 import { gameSequence } from "./game.js";
+import { turnIndicator } from "./turn-indicator.js";
 
 import { deleteFutureMovesInMoveList, highlightMove } from "./move-list.js";
 
@@ -12,7 +19,6 @@ function logGameState(gameState) {
 	gameHistory.push(gameState);
 	turnCounter += 1;
 
-	console.log(gameHistory);
 	if (turnCounter > 0) highlightMove(turnCounter - 1);
 
 	toggleUndoRedoButton();
@@ -41,6 +47,8 @@ function undoMove() {
 	if (turnCounter > 0) highlightMove(turnCounter - 1);
 
 	squares.forEach((square) => square.addEventListener("click", gameSequence));
+	turnIndicator(playerTurnIndicator[0]);
+	turnIndicator(playerTurnIndicator[2]);
 }
 
 function redoMove() {
@@ -48,6 +56,8 @@ function redoMove() {
 	printPresentGameState(turnCounter);
 	toggleUndoRedoButton();
 	highlightMove(turnCounter - 1);
+	turnIndicator(playerTurnIndicator[0]);
+	turnIndicator(playerTurnIndicator[2]);
 }
 
 function removeFutureBoardStates() {
