@@ -42,8 +42,7 @@ function gameSequence(e) {
 
 	const remainingTurn = board.flat().filter((element) => element === "").length;
 
-	turnIndicator(playerTurnIndicator[0]);
-	turnIndicator(playerTurnIndicator[2]);
+	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 
 	if (remainingTurn % 2 !== 0) {
 		printTurn(e, playerOne.mark);
@@ -62,8 +61,7 @@ function gameSequence(e) {
 	}
 
 	if (remainingTurn === 1) {
-		resetIndicator(playerTurnIndicator[0]);
-		resetIndicator(playerTurnIndicator[2]);
+		resetIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 
 		incrementScore();
 		announceWinner();
@@ -160,8 +158,7 @@ function restartGame() {
 		square.addEventListener("click", gameSequence);
 	});
 
-	resetIndicator(playerTurnIndicator[0]);
-	resetIndicator(playerTurnIndicator[2]);
+	resetIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 	turnIndicator(playerTurnIndicator[0]);
 }
 
@@ -188,4 +185,4 @@ const inGameEvent = () => {
 	);
 };
 
-export { inGameEvent, restartGame, board, gameSequence };
+export { inGameEvent, restartGame, board, gameSequence, winnerState };

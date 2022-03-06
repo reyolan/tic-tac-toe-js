@@ -5,7 +5,7 @@ import {
 	playerScore,
 	playerTurnIndicator,
 } from "./constant.js";
-import { gameSequence } from "./game.js";
+import { gameSequence, winnerState } from "./game.js";
 import { turnIndicator } from "./turn-indicator.js";
 
 import { deleteFutureMovesInMoveList, highlightMove } from "./move-list.js";
@@ -47,8 +47,7 @@ function undoMove() {
 	if (turnCounter > 0) highlightMove(turnCounter - 1);
 
 	squares.forEach((square) => square.addEventListener("click", gameSequence));
-	turnIndicator(playerTurnIndicator[0]);
-	turnIndicator(playerTurnIndicator[2]);
+	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 }
 
 function redoMove() {
@@ -56,8 +55,12 @@ function redoMove() {
 	printPresentGameState(turnCounter);
 	toggleUndoRedoButton();
 	highlightMove(turnCounter - 1);
-	turnIndicator(playerTurnIndicator[0]);
-	turnIndicator(playerTurnIndicator[2]);
+	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
+
+	if (winnerState)
+		squares.forEach((square) =>
+			square.removeEventListener("click", gameSequence)
+		);
 }
 
 function removeFutureBoardStates() {
