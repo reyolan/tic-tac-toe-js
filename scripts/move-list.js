@@ -2,7 +2,6 @@ import {
 	historyButton,
 	moveListContainer,
 	moveListElement,
-	squares,
 } from "./constant.js";
 
 const legend = [
@@ -16,16 +15,11 @@ function showMoveList() {
 }
 
 function addToMoveList(index, mark) {
-	// [...moveListElement.children].forEach((movement) =>
-	// 	movement.classList.remove("highlight")
-	// );
-
 	const li = document.createElement("li");
 	li.textContent = `${mark} @ ${legend.flat()[index]}`;
 	moveListElement.appendChild(li);
 }
 
-// add tayo ng function na maghahighlight ng move, basically classList lang to
 function highlightMove(index) {
 	[...moveListElement.children].forEach((movement) =>
 		movement.classList.remove("highlight")
@@ -35,22 +29,13 @@ function highlightMove(index) {
 }
 
 function deleteFutureMovesInMoveList(index) {
-	// moveListElement.children = [...moveListElement.children].slice(0, index);
-	// console.log([...moveListElement.children].slice(0, index));
-	// for (let i = 0; i <= index; i++) {
-	// 	moveListElement.removeChild(moveListElement.lastChild);
-	// }
-
 	[...moveListElement.children].forEach((movement, i) => {
-		if (i >= index) movement.remove(); //i >= index - 1
+		if (i >= index) movement.remove();
 	});
 }
 
 function clearMoveList() {
 	moveListElement.innerHTML = "";
-	// while (moveListElement.firstChild) {
-	// 	moveListElement.removeChild(moveListElement.firstChild);
-	// }
 }
 
 const showMoveListEvent = () =>
@@ -63,6 +48,3 @@ export {
 	highlightMove,
 	clearMoveList,
 };
-
-//create an array of movement na sunud-sunod. May function tayo na may parameters na mark and then dapat sa kada index, may specific string na nakalagay (?), incorporate natin sa squares EventListener
-// tapos print natin sa DOM via a function na may createElement li

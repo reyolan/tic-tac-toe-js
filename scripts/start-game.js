@@ -3,7 +3,6 @@ import {
 	startGameButton,
 	startGameContainer,
 	inGameContainer,
-	inputNameDiv,
 } from "./constant.js";
 
 import { firstTurn, getNameFromInput } from "./player.js";
@@ -16,9 +15,7 @@ function startGameAnimation() {
 
 	topRowElement.addEventListener(
 		"transitionend",
-		(e) => {
-			// e.target.classList.add("-hide");
-
+		() => {
 			startGameContainer.forEach((container) => {
 				container.classList.add("-hide");
 				container.classList.remove("hide-transition");

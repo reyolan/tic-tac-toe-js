@@ -29,7 +29,6 @@ let board;
 initializeBoard();
 
 let winnerState = false;
-//print to DOM
 
 function gameSequence(e) {
 	if (e.target.textContent !== "") return;

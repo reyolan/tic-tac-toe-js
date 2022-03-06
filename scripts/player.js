@@ -38,9 +38,13 @@ function getNameFromInput() {
 }
 
 function resetScore() {
-	playerScore[0].textContent = playerOne.score = 0;
-	playerScore[1].textContent = tieScore = 0;
-	playerScore[2].textContent = playerTwo.score = 0;
+	playerScore[0].textContent =
+		playerOne.score =
+		playerScore[1].textContent =
+		tieScore =
+		playerScore[2].textContent =
+		playerTwo.score =
+			0;
 }
 
 function changeScoreFromState(
