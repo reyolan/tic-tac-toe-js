@@ -112,11 +112,11 @@ function announceWinner(mark = "", name = "") {
 	);
 
 	modalWinner.classList.remove("-hide");
+
 	if (!mark && !name) {
-		winnerText.textContent = `DRAW!`;
+		winnerText.textContent = "DRAW!";
 		return;
 	}
-
 	winnerText.textContent = `${name} (${mark}) WINS!`;
 }
 

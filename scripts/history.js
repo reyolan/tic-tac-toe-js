@@ -11,7 +11,6 @@ import { turnIndicator } from "./turn-indicator.js";
 import { deleteFutureMovesInMoveList, highlightMove } from "./move-list.js";
 
 let undoState = false;
-
 let gameHistory = [];
 let turnCounter = -1;
 
