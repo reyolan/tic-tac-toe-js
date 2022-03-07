@@ -17,6 +17,7 @@ let turnCounter = -1;
 function logGameState(gameState) {
 	gameHistory.push(gameState);
 	turnCounter += 1;
+	console.log(gameHistory);
 
 	if (turnCounter > 0) highlightMove(turnCounter - 1);
 
