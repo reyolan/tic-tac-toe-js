@@ -106,7 +106,6 @@ function announceWinner(mark = "", name = "") {
 	squares.forEach((square) =>
 		square.removeEventListener("click", gameSequence)
 	);
-
 	modalWinner.classList.remove("-hide");
 
 	if (!mark && !name) {
