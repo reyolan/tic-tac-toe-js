@@ -177,4 +177,4 @@ const inGameEvent = () => {
 	);
 };
 
-export { inGameEvent, restartGame, gameSequence, board, winnerState };
+export { inGameEvent, restartGame, gameSequence, board };

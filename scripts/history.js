@@ -5,7 +5,7 @@ import {
 	playerScore,
 	playerTurnIndicator,
 } from "./constant.js";
-import { gameSequence, winnerState } from "./game.js";
+import { gameSequence } from "./game.js";
 import { turnIndicator } from "./turn-indicator.js";
 
 import { deleteFutureMovesInMoveList, highlightMove } from "./move-list.js";
