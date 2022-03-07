@@ -100,9 +100,14 @@ button {
   display: none;
 }
 
+.middle {
+  padding: 2rem;
+}
+
 .bottom {
-  height: 6rem;
+  height: auto;
   background-color: black;
+  padding: 1.2rem;
 }
 
 .row {
@@ -206,6 +211,8 @@ button:hover {
   width: 100%;
   padding: 0 1rem;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
   position: relative;
 }
 .in-game.game {
