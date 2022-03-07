@@ -65,6 +65,7 @@ button {
 
 .modal-winner {
   font-size: 10rem;
+  text-align: center;
   color: white;
 }
 
@@ -127,7 +128,7 @@ button:hover {
 }
 
 .modal-winner {
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   height: inherit;
   width: 100%;
@@ -322,6 +323,19 @@ button:hover {
 
   .game-option {
     margin-left: auto;
+  }
+
+  .turn {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .in-game.buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .in-game.buttons #return {
+    order: 1;
   }
 }
 .input-name {
