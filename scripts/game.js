@@ -31,16 +31,14 @@ initializeBoard();
 let winnerState = false;
 
 function gameSequence(e) {
-	if (e.target.textContent !== "") return;
+	if (e.target.textContent) return;
 
 	if (undoState) {
 		removeFutureGameStates();
 	}
 
 	board = passBoardState();
-
 	const remainingTurn = board.flat().filter((element) => element === "").length;
-
 	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 
 	if (remainingTurn % 2 !== 0) {
