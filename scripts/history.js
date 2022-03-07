@@ -55,6 +55,10 @@ function redoMove() {
 	toggleUndoRedoButton();
 	highlightMove(turnCounter - 1);
 
+	if (turnCounter === gameHistory.length - 1)
+		squares.forEach((square) =>
+			square.removeEventListener("click", gameSequence)
+		);
 	turnIndicator(playerTurnIndicator[0], playerTurnIndicator[2]);
 }
 
