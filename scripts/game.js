@@ -63,39 +63,35 @@ function gameSequence(e) {
 	}
 }
 
-function checkColumn(board, mark) {
+function isMatchWithPattern(board, mark) {
 	const flatBoard = board.flat();
 	const columnOne = flatBoard.filter((_, i) => i % 3 === 0);
 	const columnTwo = flatBoard.slice(1).filter((_, i) => i % 3 === 0);
 	const columnThree = flatBoard.slice(2).filter((_, i) => i % 3 === 0);
-
-	return isMatchWithPattern([columnOne, columnTwo, columnThree], mark);
-}
-
-function checkRow(board, mark) {
-	return isMatchWithPattern(board, mark);
-}
-
-function checkDiagonal(board, mark) {
-	const flatBoard = board.flat();
 	const diagonalOne = flatBoard.filter((_, i) => i % 4 === 0);
 	const diagonalTwo = flatBoard.slice(2, 8).filter((_, i) => i % 2 === 0);
+	const rowOne = board[0];
+	const rowTwo = board[1];
+	const rowThree = board[2];
 
-	return isMatchWithPattern([diagonalOne, diagonalTwo], mark);
-}
+	const boardPatterns = [
+		columnOne,
+		columnTwo,
+		columnThree,
+		diagonalOne,
+		diagonalTwo,
+		rowOne,
+		rowTwo,
+		rowThree,
+	];
 
-function isMatchWithPattern(board, mark) {
-	for (let i = 0; i < board.length; i++) {
-		if (board[i].every((element) => element === mark)) return true;
+	for (let i = 0; i < boardPatterns.length; i++) {
+		if (boardPatterns[i].every((element) => element === mark)) return true;
 	}
 }
 
 function isWinner(board, mark, name) {
-	if (
-		checkColumn(board, mark) ||
-		checkRow(board, mark) ||
-		checkDiagonal(board, mark)
-	) {
+	if (isMatchWithPattern(board, mark)) {
 		announceWinner(mark, name);
 		winnerState = true;
 		return true;
